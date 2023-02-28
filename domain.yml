@@ -1,0 +1,76 @@
+version: "3.1"
+intents:
+- greet
+- goodbye
+- operation
+- provide_operand
+- affirm
+- deny
+- more_operations
+- stop
+entities:
+- operand
+
+slots:
+  operation:
+    type: categorical
+    values:
+    - add
+    - subtract
+    - multiply
+    - divide
+    mappings:
+      - type: from_text
+        intent: provide_operation
+  operand_1:
+    type: float
+    mappings:
+      - type: from_entity
+        entity: number
+        role: operand_1
+  operand_2:
+    type: float
+    mappings:
+      - type: from_entity
+        entity: number
+        role: operand_2
+
+
+
+
+responses:
+  utter_greet:
+  - text: "Hello! I'm a bot that can perform basic mathematical operations. What can I do for you?"
+  utter_goodbye:
+  - text: "Goodbye!"
+  utter_ask_operation:
+  - text: "What mathematical operation do you want me to perform?"
+  utter_ask_operand_1:
+  - text: "What is the first operand?"
+  utter_ask_operand_2:
+  - text: "What is the second operand?"
+  utter_result:
+  - text: "The {operation} of {operand_1} and {operand_2} is {result}."
+  utter_error:
+  - text: "I'm sorry, I didn't understand. Please try again."
+  utter_divide_by_zero:
+  - text: "The second operand cannot be 0. Please enter a valid value."
+  utter_more_operations:
+  - text: "Sure, let's do another operation. What can I do for you?"
+  utter_stop:
+  - text: "Sure, let me know if you need any more help."
+actions:
+- utter_greet
+- utter_goodbye
+- utter_ask_operation
+- utter_ask_operand_1
+- utter_ask_operand_2
+- utter_result
+- utter_error
+- utter_divide_by_zero
+- utter_more_operations
+- utter_stop
+- action_perform_operation
+- action_ask_for_more_operations
+
+

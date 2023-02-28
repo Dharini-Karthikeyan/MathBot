@@ -1,0 +1,122 @@
+# version: "3.1"
+
+# stories:
+# - story: happy path
+#   steps:
+#   - intent: greet
+#   - action: action_greet_user
+#   - intent: ask_math_operation
+#   - action: action_provide_available_operations
+#   - intent: provide_first_operand
+#   - action: action_validate_first_operand
+#   - intent: provide_second_operand
+#   - action: action_validate_second_operand
+#   - action: action_perform_math_operation
+#   - intent: more_operations
+#   - action: action_provide_available_operations
+#   - intent: provide_first_operand
+#   - action: action_validate_first_operand
+#   - intent: provide_second_operand
+#   - action: action_validate_second_operand
+#   - action: action_perform_math_operation
+#   - intent: goodbye
+#   - action: action_goodbye
+
+# - story: fallback and error handling
+#   steps:
+#   - intent: greet
+#   - action: action_greet_user
+#   - intent: ask_math_operation
+#   - action: action_provide_available_operations
+#   - intent: provide_first_operand
+#   - action: action_validate_first_operand
+#   - intent: provide_second_operand
+#   - action: action_validate_second_operand
+#   - action: action_perform_math_operation
+#   - intent: unknown
+#   - action: action_fallback
+#   - intent: more_operations
+#   - action: action_provide_available_operations
+#   - intent: provide_first_operand
+#   - action: action_validate_first_operand
+#   - intent: provide_second_operand
+#   - action: action_validate_second_operand
+#   - action: action_perform_math_operation
+#   - intent: goodbye
+#   - action: action_goodbye
+
+
+# - story: sad path 1
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: affirm
+#   - action: utter_happy
+
+# - story: sad path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: deny
+#   - action: utter_goodbye
+
+version: "3.1"
+stories:
+- story: greet and perform operation
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: operation
+  - slot_was_set:
+    - operation: add
+  - action: utter_ask_operand_1
+  - intent: provide_operand
+  - slot_was_set:
+    - operand_1: 4
+  - action: utter_ask_operand_2
+  - intent: provide_operand
+  - slot_was_set:
+    - operand_2: 5
+  - action: action_perform_operation
+  - action: utter_result
+- story: greet, perform operation, and ask for more operations
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: operation
+  - slot_was_set:
+    - operation: subtract
+  - action: utter_ask_operand_1
+  - intent: provide_operand
+  - slot_was_set:
+    - operand_1: 10
+  - action: utter_ask_operand_2
+  - intent: provide_operand
+  - slot_was_set:
+    - operand_2: 3
+  - action: action_perform_operation
+  - action: utter_result
+  - intent: more_operations
+  - action: action_ask_for_more_operations
+  - intent: operation
+  - slot_was_set:
+    - operation: multiply
+  - action: utter_ask_operand_1
+  - intent: provide_operand
+  - slot_was_set:
+    - operand_1: 2
+  - action: utter_ask_operand_2
+  - intent: provide_operand
+  - slot_was_set:
+    - operand_2: 7
+  - action: action_perform_operation
+  - action: utter_result
+  - intent: stop
+  - action: utter_stop
+

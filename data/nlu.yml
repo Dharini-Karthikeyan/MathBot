@@ -1,0 +1,46 @@
+
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - good morning
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you later
+- intent: operation
+  examples: |
+    - add
+    - subtract
+    - multiply
+    - divide
+- intent: provide_operand
+  examples: |
+    - [4](operand)
+    - [5](operand)
+- intent: affirm
+  examples: |
+    - yes
+    - sure
+    - of course
+- intent: deny
+  examples: |
+    - no
+    - not really
+    - not sure
+- intent: more_operations
+  examples: |
+    - more operations
+    - another operation
+- intent: stop
+  examples: |
+    - stop
+    - quit
+    - exit
+- regex: operand
+  examples: |
+    - \d+
